@@ -15,7 +15,7 @@ def create_poll(question, days):
         pub_date=timezone.now() + datetime.timedelta(days=days))
 
 
-class PollIndexDetailTests(TestCase):
+class PollDetailViewTests(TestCase):
     def test_detail_view_with_a_future_poll(self):
         """
         The detail view of a poll with a pub_date in the future should return a 
@@ -35,7 +35,7 @@ class PollIndexDetailTests(TestCase):
         self.assertContains(response, past_poll.question, status_code=200)
 
 
-class PollViewTests(TestCase):
+class PollIndexViewTests(TestCase):
     def test_index_view_with_no_polls(self):
         """
         If no polls exist, an appropriate message should be displayed.
