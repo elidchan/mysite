@@ -23,8 +23,12 @@ class IndexView(generic.ListView):
 #        return Poll.objects.order_by('-pub_date')[:5]
 
 class DetailView(generic.DetailView):
-	model = Poll
-	template_name = 'polls/detail.html'
+    model = Poll
+    template_name = 'polls/detail.html'
+
+    def get_queryset(self):
+        """Exclude any polls that aren't published yet."""
+        return Poll.objects.filter(pub_date__lte=timezone.now())
 
 class ResultsView(generic.DetailView):
 	model = Poll
